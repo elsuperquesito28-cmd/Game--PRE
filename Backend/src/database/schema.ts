@@ -187,6 +187,24 @@ export const pending = sqliteTable(
     })
 );
 
+export const tokens = sqliteTable(
+    'tokens',
+    {
+        id: text('id').notNull().primaryKey(),
+        userId: text('user_id')
+            .notNull()
+            .references(() => users.id, { onDelete: 'cascade' }),
+        tokenHash: text('token_hash').notNull(),
+        useAt: integer('use_at'),
+        createdAt: integer('created_at').notNull(),
+        expiresAt: integer('expires_at').notNull()
+    },
+    table => ({
+        idxTokens: index('idx_tokens').on(table.tokenHash),
+        idxUser: index('idx_userId').on(table.userId)
+    })
+);
+
 export const gameRelations = relations(game, ({ many, one }) => ({
     miners: many(miners),
     inventory: many(inventory),

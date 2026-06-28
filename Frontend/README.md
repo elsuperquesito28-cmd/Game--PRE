@@ -1,5 +1,0 @@
-juegoBase
-toolMixin
-inventarioMixin
-buildingMixin
-minerMixin

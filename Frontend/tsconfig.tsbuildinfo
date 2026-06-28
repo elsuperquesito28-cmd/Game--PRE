@@ -1,1 +1,0 @@
-{"root":["./main.tsx","./vite.config.ts","./src/logic/class/building.ts","./src/logic/class/miner.ts","./src/logic/class/tool.ts","./src/logic/factory/factory.ts","./src/logic/factory/verify.ts","./src/logic/mixin/gameBase.ts","./src/logic/mixin/miners.ts","./src/logic/mixin/tool.ts","./src/logic/mixin/interface/interface.ts"],"errors":true,"version":"6.0.3"}
