@@ -1,0 +1,18 @@
+{
+    "name": "miprimerservidor",
+    "version": "1.0.0",
+    "type": "module",
+    "dependencies": {
+        "@types/node": "25.9.2",
+        "@types/pg": "8.20.0",
+        "bcryptjs": "3.0.3",
+        "better-sqlite3": "12.10.0",
+        "cors": "2.8.6",
+        "dotenv": "16.6.1",
+        "express": "5.2.1",
+        "express-rate-limit": "7.0.0",
+        "jsonwebtoken": "9.0.3",
+        "ts-node": "10.9.2",
+        "typescript": "6.0.3"
+    }
+}

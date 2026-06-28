@@ -1,0 +1,136 @@
+{
+    "coins": 50,
+    "clickCoins": 1,
+    "level": 1,
+    "levelNumber": 1,
+    "limit": 10,
+
+    "miners": [
+        {
+            "type": "beginner",
+            "name": "minero 0",
+            "maxLevel": 25,
+            "level": 1,
+            "cost": 100,
+            "costImprovement": 225,
+            "force": 2,
+            "tool": {
+                "type": "pick",
+                "cost": 0,
+                "efficiency": 1,
+                "fortune": 1,
+                "probability": 0,
+                "costImprovent": 50,
+                "value": 2,
+                "availability": false,
+                "maxLevel": 20
+            }
+        },
+        {
+            "type": "beginner",
+            "name": "minero 0",
+            "maxLevel": 25,
+            "level": 1,
+            "cost": 100,
+            "costImprovement": 225,
+            "force": 2,
+            "tool": {
+                "type": "pick",
+                "cost": 0,
+                "efficiency": 1,
+                "fortune": 1,
+                "probability": 0,
+                "costImprovent": 50,
+                "value": 2,
+                "availability": false,
+                "maxLevel": 20
+            }
+        }
+    ],
+
+    "inventory": [
+        { "name": "carbon", "price": 2, "probability": 90 },
+        { "name": "bronce", "price": 4, "probability": 40 },
+        { "name": "hierro", "price": 6, "probability": 25 },
+        { "name": "oro", "price": 10, "probability": 10 },
+        { "name": "diamante", "price": 30, "probability": 1 },
+        { "name": "rubi", "price": 2500, "probability": 0.00005 },
+        { "name": "terracota", "price": 0, "probability": 0.5 }
+    ],
+
+    "building": {
+        "type": "little",
+        "quantity": 1,
+        "cost": 1000,
+        "amountImprovement": 1,
+        "maxLevel": 20,
+        "capacity": 10,
+        "level": 1
+    },
+
+    "minersBase": [
+        {
+            "type": "beginner",
+            "maxLevel": 25,
+            "cost": 100,
+            "costImprovent": 225,
+            "level": 1
+        },
+        {
+            "type": "medium",
+            "maxLevel": 30,
+            "cost": 1000,
+            "costImprovent": 500,
+            "level": 1
+        },
+        {
+            "type": "expert",
+            "maxLevel": 40,
+            "cost": 10000,
+            "costImprovent": 1000,
+            "level": 1
+        }
+    ],
+
+    "toolBase": [
+        {
+            "type": "pick",
+            "efficiency": 1,
+            "fortune": 1,
+            "probability": 0,
+            "cost": 0,
+            "costImprovent": 50,
+            "value": 2,
+            "availability": false,
+            "maxLevel": 20
+        },
+        {
+            "type": "drill",
+            "efficiency": 1,
+            "fortune": 1,
+            "probability": 0.02,
+            "cost": 250,
+            "costImprovent": 150,
+            "value": 50,
+            "availability": false,
+            "maxLevel": 25
+        },
+        {
+            "type": "bigDrill",
+            "efficiency": 1,
+            "fotune": 1,
+            "probability": 0.05,
+            "cost": 600,
+            "costImprovent": 350,
+            "value": 200,
+            "availability": false,
+            "maxLevel": 30
+        }
+    ],
+
+    "nameMiners": [
+        { "type": "beginner", "count": 2 },
+        { "type": "medium", "count": 0 },
+        { "type": "expert", "count": 0 }
+    ]
+}
