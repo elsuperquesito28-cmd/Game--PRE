@@ -1,44 +1,21 @@
-import os from 'os';
-
-os.networkInterfaces = () => ({});
-
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import autoLoad from '@fastify/autoload';
-
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { type TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = Fastify({
-    logger: {
-        transport: {
-            target: 'pino-pretty',
-            options: {
-                translateTime: 'HH:MM:ss Z',
-                colorize: true
-            }
-        }
-    }
-});
+    logger: true
+}).withTypeProvider<TypeBoxTypeProvider>();
+
 await app.register(cors, {
-    origin: '*', // En producción cambia esto por el dominio de tu app/frontend
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
-});
-
-app.addHook('preHandler', async request => {
-    const datosLimpios = {
-        method: request.method,
-        url: request.url,
-        body: request.body || 'Sin datos',
-        client: request.ip,
-        navegator: request.headers['user-agent']
-    };
-
-    app.log.info(datosLimpios);
 });
 
 await app.register(autoLoad, {
@@ -46,14 +23,19 @@ await app.register(autoLoad, {
 });
 
 await app.register(autoLoad, {
-    dir: join(__dirname, 'router')
-    //routeParams: true,
-    //indexPattern: /^index\.(ts|js)$/
+    dir: join(__dirname, 'routes'),
+    dirNameRoutePrefix(_folderParent, folderName) {
+        if (folderName.startsWith('_')) {
+            return ':' + folderName.slice(1);
+        }
+        return folderName;
+    }
 });
 
-app.get('/', async () => {
+app.get('/', () => {
     return { hello: 'world' };
 });
+await app.ready();
 
 try {
     await app.listen({ port: 3000, host: '127.0.0.1' });

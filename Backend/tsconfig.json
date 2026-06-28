@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-        "rootDir": "./src",
-        "outDir": "./dist",
+        "rootDir": "./",
+        "outDir": "./out/dist/",
         "noEmit": false,
 
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
 
         "target": "esnext",
 
@@ -30,7 +30,6 @@
         "strictPropertyInitialization": true,
 
         "strict": true,
-        "jsx": "react-jsx",
         "verbatimModuleSyntax": true,
         "isolatedModules": true,
         "noUncheckedSideEffectImports": true,
