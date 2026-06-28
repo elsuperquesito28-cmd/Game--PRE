@@ -45,7 +45,7 @@ export const MinerSchema = Type.Object({
         probability: Type.Integer()
     })
 });
- const InventorySchema = Type.Object({
+const InventorySchema = Type.Object({
     id: Type.String(),
     gameId: Type.String(),
     mineralName: Type.String(),
@@ -67,5 +67,5 @@ export const GetGameIdResponse = {
     200: GetGameIdResponsePre,
     404: Type.Object({
         error: Type.String()
-  })
+    })
 };
