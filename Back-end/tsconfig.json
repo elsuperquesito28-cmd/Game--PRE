@@ -4,13 +4,13 @@
         "outDir": "./out/dist/",
         "noEmit": false,
 
-        "module": "nodenext",
-        "moduleResolution": "nodenext",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
 
         "target": "esnext",
 
         "lib": ["esnext"],
-        "types": ["node"],
+        "types": ["node", "vitest/globals"],
 
         "sourceMap": true,
         "declaration": true,
@@ -35,5 +35,6 @@
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
         "skipLibCheck": true
-    }
+    },
+    "include": ["src/**/*", "vitest.config.ts"] 
 }

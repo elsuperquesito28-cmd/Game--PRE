@@ -12,6 +12,9 @@ sqlite.exec(
     "INSERT OR IGNORE INTO game (id, coins, level, level_number, click_coins, limit_miners) VALUES ('hola', 100, 1, 1, 1, 5);"
 );
 sqlite.exec(
+    "INSERT OR IGNORE INTO users (id, game_id, user, password) VALUES ('user1', 'hola', 'elsuperquesito', '1838');"
+);
+sqlite.exec(
     "INSERT OR IGNORE INTO miners (id, game_id, type, name, force, level, max_level, cost, cost_improvement) VALUES ('miner1', 'hola', 'beginner', 'MinerName1', 50, 2, 25, 100, 250);"
 );
 sqlite.exec(

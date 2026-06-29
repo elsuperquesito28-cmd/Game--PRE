@@ -27,7 +27,7 @@ const sign = (
     payload: PayloadDates,
     type: tokensTypes,
     fastify: FastifyInstance
-): Promise<string> => {
+): string => {
     const privateKey = fastify.keys[type].private;
 
     const options: SignOptions = {

@@ -7,7 +7,7 @@ import { type FastifyInstance } from 'fastify';
 const __dirname = import.meta.dirname;
 
 const $ = async (el: string[]) => {
-    const routeSmall: string[] = ['..', '..', 'keys'];
+    const routeSmall: string[] = ['..','..', '..', 'keys'];
     const route = [...routeSmall, ...el];
     const routeAbs = join(__dirname, ...route);
 

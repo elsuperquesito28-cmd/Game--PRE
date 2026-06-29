@@ -2,18 +2,25 @@ import { type AuthRepository } from '../domain/auth.repository.js';
 import { type AuthBodyType, type AuthResponse } from '../../../definitions/definitions.js';
 
 export class LoginUseCase {
-    #authRepository;
+    private authRepository;
     constructor(auth: AuthRepository) {
-        this.#authRepository = auth;
+        this.authRepository = auth;
     }
 
     execute = async (credentials: AuthBodyType): Promise<AuthResponse> => {
-        const user = await this.#authRepository.findUserByUserName(credentials.userName);
+        const user = await this.authRepository.findUserByUserName(credentials.userName);
 
         if (!user) throw new Error('User not found');
 
-        if (user.password !== credentials.password) throw new Error('Invalid password');
+        const values = {
+            password: credentials.password,
+            hash: user.password
+        };
 
-        return this.#authRepository.generateToken()
+        const compare: boolean =await this.authRepository.compare(values);
+
+        if (!compare) throw new Error('Invalid password');
+
+        return this.authRepository.generateToken({ userId: user.id, gameId: String(user.gameId) });
     };
 }

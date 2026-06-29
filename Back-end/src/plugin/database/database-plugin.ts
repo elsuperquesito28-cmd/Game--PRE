@@ -1,5 +1,5 @@
 import fp from 'fastify-plugin';
-import { db, type TypeDB } from '../database/db.js';
+import { db, type TypeDB } from '../../database/db.js';
 
 declare module 'fastify' {
     interface FastifyInstance {

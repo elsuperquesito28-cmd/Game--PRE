@@ -1,16 +1,20 @@
 import { type RouteHandler } from 'fastify';
 import { type AuthBodyType, type AuthResponse } from '../../../definitions/definitions.js';
-import { DrizzleAuthRepository } from './drizzle-auth.repository.js';
+
 import { LoginUseCase } from '../application/login.use-case.js';
 
 export const LoginHandler: RouteHandler<{
     Body: AuthBodyType;
     Reply: AuthResponse;
 }> = async (request, reply) => {
-    const auhtRepository = new DrizzleAuthRepository(request.server.db);
-    const loginUseCase = new LoginUseCase(auhtRepository);
+    const app = request.server;
+
+    const repository = app.RepositoryAuth;
+    const loginUseCase = new LoginUseCase(repository);
     try {
         const result = await loginUseCase.execute(request.body);
+
+        
 
         return reply.status(200).send(result);
     } catch (e) {

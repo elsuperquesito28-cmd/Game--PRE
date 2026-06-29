@@ -3,13 +3,12 @@ import { type RouteHandler } from 'fastify';
 import { type BuildingReaponse, type BuildingParams } from '../../../definitions/definitions.js';
 
 import { BuildingUseCaseGet } from '../application/get-building.use-case.js';
-import { DrizzleBuildingRepository } from './drizzle.building-repository.js';
 
 export const BuildingHanlder: RouteHandler<{
     Params: BuildingParams;
     Reply: BuildingReaponse;
 }> = async (request, reply) => {
-    const repository = new DrizzleBuildingRepository(request.server.db);
+    const repository = request.server.buildingRepository
 
     const useCase = new BuildingUseCaseGet(repository);
 
