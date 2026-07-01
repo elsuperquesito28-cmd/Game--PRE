@@ -36,6 +36,8 @@ export const creatorId = (
     if (values.id !== undefined) return values.id;
 
     const idGenerate = generateId(entityType, type);
+    
+    if(values.base) return `B_${idGenerate}`
 
     // Un if limpio es más fácil de parsear matemáticamente que el ternario anidado de antes
     return typeof process !== 'undefined' && process.versions?.node

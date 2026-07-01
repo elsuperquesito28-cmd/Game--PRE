@@ -1,6 +1,6 @@
 import { type RouteHandler } from 'fastify';
 import { type GameReaponse, type GameIdQueryStringType } from '../../../definitions/definitions.js';
-import { DrizzleGameRepository } from './drizzle-game.repository.js';
+
 import { GameUseCase } from '../application/game.use-case.js';
 
 export const GetGameHandler: RouteHandler<{
@@ -8,8 +8,8 @@ export const GetGameHandler: RouteHandler<{
     Params: GameIdQueryStringType;
 }> = async (request, reply) => {
     try {
-        const DrizzleRepository = new DrizzleGameRepository(request.server.db);
-        const useCase = new GameUseCase(DrizzleRepository);
+        const repository = request.server.gameRepository;
+        const useCase = new GameUseCase(repository);
 
         const game = await useCase.execute(request.params);
 

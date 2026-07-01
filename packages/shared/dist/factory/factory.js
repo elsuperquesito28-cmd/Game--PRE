@@ -2,8 +2,6 @@ import { creatorId, generateId } from './generateId.js';
 import { createProbabilities } from './mineral.js';
 import { dictionaryMinerals } from './diccionaryId.js';
 import MinerClass from '../class/miner.js';
-import { dataMiner } from '../base/base-miner-data.js';
-import { toolData } from '../base/base-tool-data.js';
 import ToolClass from '../class/tool.js';
 import { dataBuilding } from '../base/base-building-base.js';
 import BuildingClass from '../class/building.js';
@@ -20,39 +18,39 @@ const createMineralProbabilities = (type, force) => {
     mineralList = createProbabilities(force, mineralList, type);
     return mineralList;
 };
-const createTool = (type, values) => {
-    const toolBase = toolData.find(n => n.type === type);
-    if (!toolBase)
-        throw new Error('This type of tool not exists');
+const createTool = (type, { reference, id: paramId, availability, defaultP }) => {
     const level = 1;
-    const paramId = values.id;
+    if (defaultP)
+        availability = false;
     const id = creatorId('tool', type, { id: paramId });
-    const dataTool = { ...toolBase, ...values, id, level };
-    return new ToolClass(dataTool);
+    const values = {
+        ...reference,
+        availability,
+        level,
+        id
+    };
+    return new ToolClass(values);
 };
-const createMiners = (type, values) => {
-    let minerBase = dataMiner.find(n => n.type === type);
-    if (!minerBase)
-        throw new Error('this miner not exists');
-    if (values.reference)
-        minerBase = values.reference;
+const createMiners = (type, { name, tool: toolD, reference, toolPermise, id: paramId }) => {
     const toolCreate = createTool('pick', {
-        availability: false
+        availability: false,
+        defaultP: true
     });
     let tool = toolCreate;
-    if (values.tool) {
-        tool = values.tool;
+    if (toolD) {
+        tool = toolD;
     }
-    if (values.toolPermise) {
+    if (toolPermise) {
         tool = toolCreate;
     }
-    const paramId = values.id;
     const id = creatorId('miner', type, { id: paramId });
-    const force = MinerClass.calculateForce(1, minerBase.maxLevel);
+    const force = MinerClass.calculateForce(1, reference.maxLevel);
     const level = force;
     const probabilities = createMineralProbabilities(type, force);
+    const values = {
+        ...reference, name, tool
+    };
     const minerData = {
-        ...minerBase,
         ...values,
         tool,
         id,

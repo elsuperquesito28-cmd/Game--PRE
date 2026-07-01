@@ -5,7 +5,7 @@ import { dictionaryMinerals } from '../factory/diccionaryId.js';
 export interface ParamsCreateMiner {
     name: string;
     tool?: ITool;
-    reference?: IMiner;
+    reference: IMiner;
     toolPermise?: boolean;
     id?: string | undefined;
 }
@@ -13,6 +13,7 @@ export interface ParamsCreateTool {
     availability: boolean;
     reference?: ITool;
     id?: string | undefined;
+    defaultP?: boolean;
 }
 export type MineralsOptions = keyof typeof dictionaryMinerals;
 export type MinersOption = (typeof dataMiner)[number]['type'];
@@ -75,7 +76,7 @@ export type EntityReturnMap = {
     tool: ITool;
     building: IBuilding;
 };
-type MinerMaxLevel = (typeof dataMiner)[number]['maxLevel'];
+export type MinerMaxLevel = (typeof dataMiner)[number]['maxLevel'];
 export interface MinerBase {
     type: MinersOption;
     maxLevel: MinerMaxLevel;

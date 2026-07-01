@@ -13,6 +13,12 @@ interface PayloadDates {
     gameId: string;
 }
 
+interface UserDates {
+  gameId:string,
+  password:string
+  username:string
+}
+
 export class DrizzleAuthRepository implements AuthRepository {
     private db: FastifyInstance['db'];
     private server: FastifyInstance;
@@ -27,9 +33,9 @@ export class DrizzleAuthRepository implements AuthRepository {
         return user || null;
     };
 
-    insertUser = async (user: string, password: string, gameId: string) => {
+    insertUser = async ({username, password, gameId}:UserDates) => {
         this.db.insert(users).values({
-            user,
+            username,
             password,
             gameId,
             id: generateGameId()

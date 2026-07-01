@@ -10,7 +10,7 @@ export default class Minero {
     produce: (bonus?: number) => IMineralMiner[];
     levelUp: () => void;
     get level(): number;
-    get maxLevel(): MinerMaxLevel;
+    get maxLevel(): 25 | 50 | 35;
     get force(): number;
     get costImprovement(): number;
     get capacity(): number;

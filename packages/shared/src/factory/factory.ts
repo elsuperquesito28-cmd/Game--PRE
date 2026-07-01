@@ -3,7 +3,6 @@ import { createProbabilities } from './mineral.js';
 import { dictionaryMinerals } from './diccionaryId.js';
 
 import {
-    
     type MinersOption,
     type ToolsOptions,
     type BuildingOptions,
@@ -57,54 +56,55 @@ const createMineralProbabilities = (type: MinersOption, force: number): IMineral
     return mineralList;
 };
 
-const createTool = (type: ToolsOptions, values: ParamsCreateTool): ITool => {
-    const toolBase = toolData.find(n => n.type === type);
-
-    if (!toolBase) throw new Error('This type of tool not exists');
-
+const createTool = (
+    type: ToolsOptions,
+    { reference, id: paramId, availability }: ParamsCreateTool
+): ITool => {
     const level: number = 1;
-
-    const paramId = values.id;
 
     const id: string = creatorId('tool', type, { id: paramId });
 
-    const dataTool: ITool = { ...toolBase, ...values, id, level };
+    if (!reference) return ToolClass.createInstance(type, { availability });
 
-    return new ToolClass(dataTool);
+    const values = {
+        ...reference,
+        availability,
+        level,
+        id
+    };
+
+    return new ToolClass(values);
 };
 
-const createMiners = (type: MinersOption, values: ParamsCreateMiner): IMiner => {
-    let minerBase: MinerBase | undefined = dataMiner.find(n => n.type === type);
+const createMiners = (
+    type: MinersOption,
+    { name, tool: toolD, reference, toolPermise, id: paramId }: ParamsCreateMiner
+): IMiner => {
+    let tool: ITool;
 
-    if (!minerBase) throw new Error('this miner not exists');
-
-    if (values.reference) minerBase = values.reference;
-
-    const toolCreate = createTool('pick', {
-        availability: false
-    });
-    let tool: ITool = toolCreate;
-
-    if (values.tool) {
-        tool = values.tool;
+    if (toolD) {
+        tool = toolD;
     }
 
-    if (values.toolPermise) {
-        tool = toolCreate;
+    if (toolPermise) {
+        tool = ToolClass.createInstance('pick', )
     }
-
-    const paramId = values.id;
 
     const id: string = creatorId('miner', type, { id: paramId });
 
-    const force: number = MinerClass.calculateForce(1, minerBase.maxLevel);
+    const force: number = MinerClass.calculateForce(1, reference.maxLevel);
 
     const level: number = force;
 
     const probabilities = createMineralProbabilities(type, force);
 
+    const values = {
+        ...reference,
+        name,
+        tool
+    };
+
     const minerData: IMinerValues = {
-        ...minerBase,
         ...values,
         tool,
         id,
@@ -117,14 +117,8 @@ const createMiners = (type: MinersOption, values: ParamsCreateMiner): IMiner => 
     return new MinerClass(minerData);
 };
 
-const createBuilding = (type: BuildingOptions): IBuilding => {
-    const buildingBase = dataBuilding.find(n => n.type === type);
-
-    if (!buildingBase) throw new Error('This type of building not exists');
-
-    const id: string = generateId('building', type);
-
-    return new BuildingClass({ ...buildingBase, id });
+const createBuilding = (type: BuildingOptions) => {
+    throw new Error('This function arent availability')
 };
 
 const handlers: EntityFunctions = {

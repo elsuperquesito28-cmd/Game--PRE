@@ -29,4 +29,4 @@ export const toolData = [
         value: 200,
         maxLevel: 30
     }
-];
+] as const

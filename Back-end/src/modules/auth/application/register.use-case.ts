@@ -3,17 +3,19 @@ import { type AuthBodyType, type AuthResponse } from '../../../definitions/defin
 
 export class RegisterUseCase {
     constructor(private authRepository: AuthRepository) {}
-    execute = async (credentials: AuthBodyType): Promise<AuthResponse | null> => {
-        const user = await this.authRepository.findUserByUserName(credentials.userName);
+    execute = async ({ password, userName }: AuthBodyType): Promise<AuthResponse | null> => {
+        const user = await this.authRepository.findUserByUserName(userName);
 
         if (user) {
             throw new Error('User Register');
             return null;
         }
 
+        const passwordHash: string = await this.authRepository.hash({ password, salt: 13 });
+
         return {
-          accessToken:'',
-          refreshToken:''
+            accessToken: '',
+            refreshToken: ''
         };
     };
 }

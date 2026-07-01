@@ -17,7 +17,7 @@ export class LoginUseCase {
             hash: user.password
         };
 
-        const compare: boolean =await this.authRepository.compare(values);
+        const compare: boolean = await this.authRepository.compare(values);
 
         if (!compare) throw new Error('Invalid password');
 

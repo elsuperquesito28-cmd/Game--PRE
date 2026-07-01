@@ -6,7 +6,7 @@ import { dictionaryMinerals } from '../factory/diccionaryId.js';
 export interface ParamsCreateMiner {
     name: string;
     tool?: ITool;
-    reference?: IMiner;
+    reference: IMiner;
     toolPermise?: boolean;
     id?: string | undefined;
 }
@@ -14,6 +14,7 @@ export interface ParamsCreateTool {
     availability: boolean;
     reference?: ITool;
     id?: string | undefined;
+    defaultP?: boolean;
 }
 
 export type MineralsOptions = keyof typeof dictionaryMinerals;
@@ -30,7 +31,6 @@ export type EntityValuesMap = {
     building: {
         type: BuildingOptions;
     };
-    
 };
 
 export type EntityOptions = keyof EntityValuesMap;
@@ -95,6 +95,7 @@ export interface MinerBase {
 
 export interface ParamGenerateId {
     id: string | undefined;
+    base?: boolean
 }
 
 export interface IMineralMiner {

@@ -1,4 +1,6 @@
 import { type ToolsOptions, type ITool } from '../types/definition.js';
+import { toolData } from '../base/base-tool-data.js';
+import { creatorId } from '../factory/generateId.js';
 
 export default class Herramienta {
     type: ToolsOptions;
@@ -38,4 +40,18 @@ export default class Herramienta {
         this.probability = probability;
         this.availability = availability;
     }
+
+    static createInstance = (type: ToolsOptions, overrides: Partial<ITool>) => {
+        const base = toolData.find(n => n.type === type);
+
+        if (!base) throw new Error('This type of tool not exists');
+
+        return new Herramienta({
+            ...base,
+            id: creatorId('tool', type, { id: undefined }),
+            availability: false,
+            level: 1,
+            ...overrides
+        });
+    };
 }
